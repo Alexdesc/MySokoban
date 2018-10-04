@@ -1,2 +1,0 @@
-# MySokoban
-Sokoban Java developpement
