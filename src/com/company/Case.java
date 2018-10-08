@@ -11,13 +11,20 @@ public class Case {
 	public static final int Perso = 5;
 	public static final int PersoGoal = 6;
 	
-	private int CaseStatut;
+	private int LaCase;
 	
-	private Plateau plateau;
+	//Variable de classe Case
 	
-	public Case(int stat, Plateau plat){
-		CaseStatut = stat;
-		plateau = plat;
+	public Case(char cas){
+		this.LaCase=cas;
+	}
+
+	public int getLaCase() {
+		return LaCase;
+	}
+
+	public void setLaCase(int laCase) {
+		LaCase = laCase;
 	}
 	
 }
