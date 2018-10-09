@@ -2,7 +2,7 @@ package com.company;
 
 public class Case {
 	
-	//Définition des cases 
+	//Définition des cases
 	public static final int Sol = 0;
 	public static final int Mur = 1;
 	public static final int Caisse = 2;
