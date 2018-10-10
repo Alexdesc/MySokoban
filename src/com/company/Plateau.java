@@ -15,7 +15,18 @@ public class Plateau {
 	
 	//Tableau de 11 cases sur 19
 	private Position maze[][] = new Position[12][20];
-	
+
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+
+
 	public Plateau(String lvl) throws FileNotFoundException, IOException{
 		initPlateau(lvl);
 	}
@@ -64,7 +75,28 @@ public class Plateau {
 
 
 		for (Position pos: map.keySet()){
-			System.out.print(" " + map.get(pos));
+
+			switch (map.get(pos)) {
+				case '0':
+					System.out.print(ANSI_RESET + " " +map.get(pos));
+					break;
+				case '1':
+					System.out.print(ANSI_RED + " " + map.get(pos));
+					break;
+				case '2':
+					System.out.print(ANSI_CYAN + " " + map.get(pos));
+					break;
+				case '5':
+					System.out.print(ANSI_YELLOW + " " + map.get(pos));
+					break;
+				case '4':
+					System.out.print(ANSI_GREEN + " " + map.get(pos));
+					break;
+				default:
+					System.out.print(map.get(pos));
+			}
+
+
 		}
 
 		}
