@@ -6,8 +6,8 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-	       System.out.println("Init");
-	       Plateau p = new Plateau("lvl1.txt");
+	       //Plateau p = new Plateau("lvl1.txt");
+	       Game_Vue g = new Game_Vue();
 	       
     }
 }
