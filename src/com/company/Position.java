@@ -10,6 +10,7 @@ public class Position {
     }
 
     public int getY() {
+
         return this.y;
     }
 
@@ -19,6 +20,7 @@ public class Position {
     }
 
     public Position toDown(){
+
         return new Position(this.x, this.y + 1);
     }
 
@@ -28,6 +30,7 @@ public class Position {
     }
 
     public Position toUp(){
+
         return new Position(this.x, this.y - 1);
     }
 
