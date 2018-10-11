@@ -8,6 +8,7 @@ public class Panel extends JPanel{
 	public void paintComponent(){
 		JLabel text = new JLabel();
 		text.setText("okok");
+		text.setText("okok");
 	}
 
 }
