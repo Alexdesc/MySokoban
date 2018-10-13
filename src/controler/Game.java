@@ -5,7 +5,6 @@ import view.View;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedHashMap;
 
 public class Game {
 

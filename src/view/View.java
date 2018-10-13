@@ -77,30 +77,19 @@ public class View {
         jTextArea.setBackground(Color.black);
         jTextArea.setForeground(Color.white);
 
-
         for (int i = 0; i < maze.length - 1; i++){
-
-
             line = "";
 
             for (int j = 0; j < maze[i].length - 2 ; j++) {
 
-
                 System.out.print(map.get(maze[i][j]));
-
-                line = line +  map.get(maze[i][j])  ;
-
+                line = line +  map.get(maze[i][j]);
             }
             jTextArea.append(line);
             jTextArea.append("\n");
         }
 
-
         window.add(jTextArea);
-
-
-
-
 
     }
 
