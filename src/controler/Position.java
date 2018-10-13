@@ -1,4 +1,4 @@
-package com.company;
+package controler;
 
 public class Position {
     private int x;
