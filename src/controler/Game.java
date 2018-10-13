@@ -9,6 +9,9 @@ import java.io.IOException;
 public class Game {
 
 
+    /**
+     * Singlestons to use MVC data easily
+     */
     private View v = View.getInstance();
     private Model m = Model.getInstance();
 
