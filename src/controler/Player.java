@@ -8,4 +8,13 @@ public class Player {
       {
         this.position = position;
     }
+
+    public Position getPosition(){
+        return this.position;
+    }
+
+    public void setPosition(Position position)
+    {
+        this.position = position;
+    }
 }

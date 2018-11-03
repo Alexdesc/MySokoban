@@ -19,14 +19,18 @@ public class Position {
         return this.x;
     }
 
-    public Position toDown(){
 
-        return new Position(this.x, this.y + 1);
-    }
 
     public Position toRight()
     {
+
         return new Position(this.x + 1, this.y);
+    }
+
+
+    public Position toLeft(){
+
+        return new Position(this.x - 1, this.y);
     }
 
     public Position toUp(){
@@ -34,11 +38,10 @@ public class Position {
         return new Position(this.x, this.y - 1);
     }
 
-    public Position toLeft(){
+    public Position toDown(){
 
-        return new Position(this.x - 1, this.y);
+        return new Position(this.x, this.y + 1);
     }
-
     public boolean equals(Position position){
 
         if (this.x != position.getX()) {
