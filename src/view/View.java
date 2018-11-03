@@ -38,31 +38,8 @@ public class View {
 
         for (Position pos: map.keySet()) {
 
-            switch (map.get(pos)) {
-                case '0':
-                    System.out.print(' ');
-                    //jTextArea.append(" " + map.get(pos));
-                    break;
-                case '1':
-                    System.out.print("#");
-                    //jTextArea.append(" " + map.get(pos));
-                    break;
-                case '2':
-                    System.out.print(map.get(pos));
-                    //jTextArea.append(" " + map.get(pos));
-                    break;
-                case '5':
-                    System.out.print(map.get(pos));
-                    //jTextArea.append(" " + map.get(pos));
-                    break;
-                case '4':
-                    System.out.print(map.get(pos));
-                    break;
-                default:
-                    System.out.print(map.get(pos));
-            }
 
-          /*  switch (map.get(pos)) {
+           switch (map.get(pos)) {
                 case '0':
                     System.out.print(ANSI_RESET + " " + ' ');
                     //jTextArea.append(" " + map.get(pos));
@@ -86,7 +63,7 @@ public class View {
                 default:
                     System.out.print(map.get(pos));
             }
-            */
+
         }
     }
 
