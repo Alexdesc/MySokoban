@@ -1,6 +1,6 @@
 package view;
 
-import controler.Position;
+import model.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,8 +31,6 @@ public class View {
     }
 
     public void displayTextMaze( LinkedHashMap<Position, Character> map ){
-
-
 
 
 

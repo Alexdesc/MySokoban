@@ -1,4 +1,4 @@
-package controler;
+package model;
 
 public class Position {
     private int x;

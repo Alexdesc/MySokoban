@@ -1,13 +1,9 @@
 package model;
 
-import controler.Player;
-import controler.Position;
-import sun.font.TrueTypeFont;
-
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Model {
@@ -16,11 +12,15 @@ public class Model {
     private Player player;
     private Position maze[][] = new Position[12][20];
     private LinkedHashMap<Position, Character> map = new LinkedHashMap<Position, Character>();
+    private List<Position> ArrivalList = new ArrayList<>();
     private static final Model instance = new Model();
     private boolean Win = false;
-    private char keys[] = {'z','q','s','d'};
+    private char keys[] = {'z', 'q', 's', 'd'};
+    private char previous = '0';
+    private char previous2 = '0';
     private boolean OnTheArrival = false;
     private boolean OnTheArrival2 = false;
+
     //private constructor to avoid client applications to use constructor
     private Model() {
     }
@@ -47,8 +47,7 @@ public class Model {
             while (sc.hasNextLine()) {
                 for (char c : sc.next().toCharArray()) {
 
-                    if (x == 18)
-                    {
+                    if (x == 18) {
                         y++;
                         x = 0;
                         Position position = new Position(x, y);
@@ -61,6 +60,9 @@ public class Model {
                     if (c == '5') {
                         player = new Player(maze[y][x], "PLAYER");
                     }
+                    if (c == '4') {
+                        ArrivalList.add(maze[y][x]);
+                    }
                     map.put(maze[y][x], c);
                     x++;
                 }
@@ -72,36 +74,36 @@ public class Model {
 
     }
 
-    public void move( LinkedHashMap<Position, Character> map ) throws InterruptedException {
+    public void move(LinkedHashMap<Position, Character> map) throws InterruptedException {
 
         Scanner scanner = new Scanner(System.in);
         String key = scanner.next();
-        Position tmp = new Position(0,0);
+        Position tmp = new Position(0, 0);
         Position tmp2 = player.getPosition();
         Player player_tmp = player;
-        switch (key.toLowerCase()){
 
-                case "z":
-                    tmp = player.getPosition().toUp();
-                    break;
-                case "s":
-                    tmp = player.getPosition().toDown();
+        switch (key.toLowerCase()) {
 
-                    break;
-                case "q":
-                    tmp = player.getPosition().toLeft();
-                    break;
-                case "d":
-                    tmp = player.getPosition().toRight();
-                    break;
+            case "z":
+                tmp = player.getPosition().toUp();
+                break;
+            case "s":
+                tmp = player.getPosition().toDown();
 
-                    default:
-                        System.out.println("none");
+                break;
+            case "q":
+                tmp = player.getPosition().toLeft();
+                break;
+            case "d":
+                tmp = player.getPosition().toRight();
+                break;
+
+            default:
+                System.out.println("none");
         }
 
 
-
-        /** Move without with bloc**/
+        /** Move  with bloc**/
         if (map.get(maze[tmp.getY()][tmp.getX()]) == '2') {
 
             switch (key.toLowerCase()) {
@@ -126,54 +128,75 @@ public class Model {
 
 
             if (map.get(maze[tmp2.getY()][tmp2.getX()]) == '0' ||
-                    map.get(maze[tmp2.getY()][tmp2.getX()]) == '4') {
+                    map.get(maze[tmp2.getY()][tmp2.getX()]) == '4' && map.get(maze[tmp2.getY()][tmp2.getX()]) != '2') {
 
-                map.put(maze[tmp2.getY()][tmp2.getX()], '2');
+                System.out.println("pousse");
 
-                map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '0');
-                if (OnTheArrival2){
-                    map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '4');
-                    OnTheArrival2 = false;
+                    map.put(maze[tmp2.getY()][tmp2.getX()], '2');
+
+
+
+
+                if (!ArrivalList.contains(maze[player.getPosition().getY()][player.getPosition().getX()])) {
+
+                    map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '0');
                 }
-                if (map.get(maze[tmp.getY()][tmp.getX()]) == '4')
-                    OnTheArrival2 = true;
-
+                else{
+                    System.out.println("4 PRESENT");
+                    map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '4');
+                }
 
                 player.setPosition(tmp);
                 map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '5');
+
+
             }
         }
 
-        /** Move without without bloc**/
-        else if (map.get(maze[tmp.getY()][tmp.getX()]) != '1') {
 
-            map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '0');
-            if (OnTheArrival){
-                map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '4');
-                OnTheArrival = false;
-            }
-            if (map.get(maze[tmp.getY()][tmp.getX()]) == '4')
-                OnTheArrival = true;
+        /**===============================**/
+
+
+        /** Move without bloc**/
+         else if (map.get(maze[tmp.getY()][tmp.getX()]) != '1') {
+
+
+             if (!ArrivalList.contains(maze[player.getPosition().getY()][player.getPosition().getX()])) {
+
+                 map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '0');
+             }
+             else{
+                 System.out.println("4 PRESENT");
+                 map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '4');
+             }
+
             player.setPosition(tmp);
             map.put(maze[player.getPosition().getY()][player.getPosition().getX()], '5');
         }
         Thread.sleep(100);
 
     }
-    public LinkedHashMap getMap(){
+
+    public LinkedHashMap getMap() {
         return this.map;
     }
 
-    public void ToWin(){
+    public void ToWin() {
         this.Win = true;
     }
 
-    public boolean isWin(){
+    public boolean isWin() {
         return this.Win;
     }
-    public Position[][] getMaze(){
+
+    public Position[][] getMaze() {
         return this.maze;
     }
 
+    public List<Position> getArrivals() {
+
+        return this.ArrivalList;
+
+    }
 }
 
