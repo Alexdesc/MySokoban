@@ -3,10 +3,9 @@ package view;
 import controler.Position;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.LinkedHashMap;
 
-public class View {
+public class View extends JFrame{
 
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -18,8 +17,15 @@ public class View {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    public JTextArea jTextArea;
-    public JScrollPane jScrollPane;
+
+    //images
+    private ImageIcon wall;
+    private ImageIcon player;
+    private ImageIcon playerZone;
+    private ImageIcon object;
+    private ImageIcon objectZone;
+    private ImageIcon goal;
+    private ImageIcon none;
 
     private static final View instance = new View();
 
@@ -31,10 +37,6 @@ public class View {
     }
 
     public void displayTextMaze( LinkedHashMap<Position, Character> map ){
-
-
-
-
 
         for (Position pos: map.keySet()) {
 
@@ -67,35 +69,15 @@ public class View {
         }
     }
 
-    public void displayGraphic( Position maze[][], LinkedHashMap map){
+    /*public void displayGraphic( Position maze[][], LinkedHashMap map){
 
-        JFrame window = new JFrame();
-        window.setVisible(true);
-        window.setSize(800, 700);
-        window.setLocationRelativeTo(null);
-        window.setTitle("MySokoban Project");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Panel panel = new Panel();
-        window.setBackground(Color.black);
-        window.add(panel);
-        String line;
-        jTextArea = new JTextArea();
-        jTextArea.setBackground(Color.black);
-        jTextArea.setForeground(Color.white);
+        GraphicalMode window = new GraphicalMode(maze,map);
 
-        for (int i = 0; i < maze.length - 1; i++){
-            line = "";
+    }*/
 
-            for (int j = 0; j < maze[i].length - 2 ; j++) {
+    public void displayGraphic( LinkedHashMap<Position, Character> map){
 
-                System.out.print(map.get(maze[i][j]));
-                line = line +  map.get(maze[i][j]);
-            }
-            jTextArea.append(line);
-            jTextArea.append("\n");
-        }
-
-        window.add(jTextArea);
+        GraphicalMode window = new GraphicalMode(map);
 
     }
 

@@ -34,7 +34,11 @@ public class Game {
             }
         }
         else {
-            v.displayGraphic(m.getMaze(), m.getMap());
+            v.displayGraphic(m.getMap());
+            while (m.isWin() != true) {
+                m.move(m.getMap());
+                v.displayGraphic(m.getMap());
+            }
         }
         //current_game();
     }
