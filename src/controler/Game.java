@@ -34,10 +34,10 @@ public class Game {
             }
         }
         else {
-            v.displayGraphic(m.getMap());
+            v.GraphicalMode(m.getMap());
             while (m.isWin() != true) {
                 m.move(m.getMap());
-                v.displayGraphic(m.getMap());
+                v.Update(m.getMap());
             }
         }
         //current_game();
