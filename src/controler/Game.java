@@ -23,7 +23,7 @@ public class Game {
 
     public void initialisation() throws FileNotFoundException, IOException, InterruptedException {
         m.initPlateau("lvl1.txt");
-        System.out.println("Console mode : 1 \n Graphical mode : 2");
+        System.out.println(" Console mode : 1 \n Graphical mode : 2");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
         if (option.equals("1")){
@@ -40,7 +40,6 @@ public class Game {
                 v.Update(m.getMap());
             }
         }
-        //current_game();
     }
 
     public void current_game() {
