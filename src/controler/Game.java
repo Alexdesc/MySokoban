@@ -3,12 +3,12 @@ package controler;
 import model.Model;
 import view.View;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -18,10 +18,16 @@ public class Game {
     /**
      * Singlestons to use MVC data easily
      */
+
     private View v = View.getInstance();
     private Model m = Model.getInstance();
 
     public void initialisation() throws FileNotFoundException, IOException, InterruptedException {
+
+
+
+
+
         m.initPlateau("lvl1.txt");
         System.out.println("Console mode : 1 \n Graphical mode : 2");
         Scanner scanner = new Scanner(System.in);
@@ -29,17 +35,44 @@ public class Game {
         if (option.equals("1")){
             v.displayTextMaze(m.getMap());
             while (m.isWin() != true) {
-                m.move(m.getMap());
+                console_mode();
                 v.displayTextMaze(m.getMap());
             }
         }
         else {
-            v.displayGraphic(m.getMaze(), m.getMap());
+
+           // while (m.isWin() != true) {
+             //   graphical_mode();
+            v.displayMenu();
+
+
+            v.getMenu().getStartButton().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    v.displayGraphic(m.getMaze(), m.getMap(),m.getPlayer());
+
+                    v.getGraphic().getQuitButton().addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent event) {
+                            System.exit(0);
+                        }
+                    });
+                }
+            });
+
+            v.getMenu().getQuitButton().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    System.exit(0);
+                }
+            });
+
+
+
+           // }
+
         }
         //current_game();
     }
 
-    public void current_game() {
+    private void graphical_mode() {
 
         KeyListener keyListener = new KeyListener() {
             @Override
@@ -62,6 +95,19 @@ public class Game {
                 System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
             }
         };
+    }
+
+
+    /**Move with keyboard to play in your own**/
+
+    public void console_mode() throws InterruptedException {
+
+        Scanner scanner = new Scanner(System.in);
+        String key = scanner.next();
+
+        m.move(key);
+        Thread.sleep(100);
+
     }
 
 }
