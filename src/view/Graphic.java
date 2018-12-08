@@ -11,53 +11,45 @@ public class Graphic extends JFrame {
 
 
 
-    private  SokobanImage SImg = new SokobanImage();
+  //  private  SokobanImage SImg = new SokobanImage();
     private  Screen sc;
-    public final void initUI() {
+    private Menu info;
+
+    public final void initUI(int[] size) {
 
 
-        setTitle("Test Panel");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1000, 1000);
-        setResizable(false);
-        //setLocationRelativeTo(null);
+        setVisible(true);
+        setBackground(Color.black);
+        setSize(800, 700);
+        setLocationRelativeTo(null);
+        setTitle("MySokoban");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        BorderLayout layout = new BorderLayout();
+        this.sc  = new Screen(size[0], size[1]);
+        this.info = new Menu();
+        this.add(info, BorderLayout.PAGE_END);
+        this.add(sc, BorderLayout.CENTER);
 
 
-        setLayout(new GridLayout(1,1,0,0));
-
-        this.sc  = new Screen();
-
-        this.getContentPane().add(sc);
-        add(sc);
-
-
-
-      //  JPanel jpanel = new JPanel(new GridLayout(10, 10));
 
 
     }
 
 
-    public void graphic(Position maze[][], LinkedHashMap map, Player player) {
+    public void graphic(Position maze[][], LinkedHashMap map, Player player, int [] size ) {
 
-        initUI();
-/*
-        System.out.println("Graphic mode");
-        JFrame window = new JFrame();
-        window.setVisible(true);
-        window.setSize(800, 700);
-        window.setLocationRelativeTo(null);
-        window.setTitle("MySokoban Project");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Panel panel = new Panel();
-        window.setBackground(Color.black);
-        window.add(panel);
-*/
+        initUI(size);
+        sc.setSprite(map);
 
     }
 
 
-    public JButton getQuitButton() {
-        return sc.getQuitButton();
+    public Screen getSc() {
+        return sc;
     }
+
+    public Menu getInfo(){
+        return info;
+    }
+
 }

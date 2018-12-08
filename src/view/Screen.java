@@ -1,68 +1,117 @@
 package view;
 
+import model.Position;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.LinkedHashMap;
 
-public class Screen extends JPanel implements KeyListener, ActionListener {
+public class Screen extends JPanel{
 
 
-    private final JButton quitButton;
-
-    public Screen (){
-
-        //jpanel.setLayout(null);
+    //images
 
 
-
-
-        this.setBackground(Color.BLACK);
-        //jPanel2.setBackground(Color.YELLOW);
-
-        // jFrame.getContentPane().setLayout(new GridLayout(1,2));
-
-        //       jFrame.getContentPane().add(jPanel2);
-
-
-        this.quitButton = new JButton("Quit");
-        quitButton.setBounds(this.getX(), this.getY()*2, 80, 30);
-
-        this.add(quitButton);
-
-        JLabel j1 = new JLabel();
-        j1.setIcon(new ImageIcon("src/rsrc/perso.gif"));
+    private ImageIcon wall = new ImageIcon(getClass().getResource("../rsrc/mur.gif"));
+    private ImageIcon player = new ImageIcon(getClass().getResource("../rsrc/perso.gif"));
+    private ImageIcon playerZone = new ImageIcon(getClass().getResource("../rsrc/persoZone.gif"));
+    private ImageIcon object = new ImageIcon(getClass().getResource("../rsrc/caisse.gif"));
+    private ImageIcon objectZone = new ImageIcon(getClass().getResource("../rsrc/caisseOK.gif"));
+    private ImageIcon goal = new ImageIcon(getClass().getResource("../rsrc/zone.gif"));
+    private ImageIcon none = new ImageIcon(getClass().getResource("../rsrc/vide.gif"));
 
 
 
-        this.add(j1);
-        //   jpanel.add(SImg.getPlayer());
+    private JLabel infobar;
+    private  BorderLayout layout;
 
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public Screen (int height, int width){
+
+
+        setVisible(true);
+        setBackground(Color.black);
+        setSize(800, 700);
+
+       layout = new BorderLayout();
+        setLayout(null);
+
+        setVisible(true);
+        setBackground(Color.black);
+        GridLayout dimention = new GridLayout(height+1,width);
+        dimention.setHgap(-165);
+        dimention.setVgap(-300);
+
+        setLayout(dimention);
+
 
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
+    public void setSprite(LinkedHashMap<Position, Character> map){
 
+        for (Position pos: map.keySet()) {
+
+            switch (map.get(pos)) {
+                case '0':
+                    this.add(new JLabel(none));
+                    break;
+                case '1':
+                    this.add(new JLabel(wall));
+                    break;
+                case '2':
+                    this.add(new JLabel(object));
+                    break;
+                case '5':
+                    this.add(new JLabel(player));
+                    break;
+                case '4':
+                    this.add(new JLabel(goal));
+                    break;
+                default:
+                    this.add(new JLabel(none));
+            }
+        }
+
+        this.updateUI();
+        Update(map);
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
 
+    public void Update(LinkedHashMap<Position, Character> map){
+
+        this.removeAll();
+
+        for (Position pos: map.keySet()) {
+
+            switch (map.get(pos)) {
+                case '0':
+                    this.add(new JLabel(none));
+                    break;
+                case '1':
+                    this.add(new JLabel(wall));
+                    break;
+                case '2':
+                    this.add(new JLabel(object));
+                    break;
+                case '5':
+                    this.add(new JLabel(player));
+                    break;
+                case '4':
+                    this.add(new JLabel(goal));
+                    break;
+                default:
+                    this.add(new JLabel(none));
+            }
+        }
+
+        this.updateUI();
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 
 
-    public JButton getQuitButton() {
-        return this.quitButton;
-    }
+
+
+
+
+
+
 }

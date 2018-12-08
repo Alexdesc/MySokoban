@@ -3,66 +3,49 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu extends JFrame {
+public class Menu extends JPanel{
     private JPanel panel1;
     private JButton consoleModeButton;
     private Boolean START = false;
-    private JButton quitButton;
 
 
     private JButton startButton;
+    private JLabel infobar;
+    private  BorderLayout layout;
+    private JButton quitButton = new JButton("Quit");
 
     public Menu() {
 
 
 
+        setVisible(true);
 
 
-        setTitle("Test Panel");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(300, 500);
-        setResizable(false);
+        infobar = new JLabel();
+        layout = new BorderLayout();
 
-        JPanel jpanel = new JPanel();
-        getContentPane().add(jpanel);
-        jpanel.setLayout(null);
+        setBackground(Color.gray);
 
-        jpanel.setBackground(Color.RED);
-        //jPanel2.setBackground(Color.YELLOW);
+        quitButton = new JButton("Quit");
 
-        // jFrame.getContentPane().setLayout(new GridLayout(1,2));
+        quitButton.setFocusable(false);
 
-        this.getContentPane().add(jpanel);
-        //       jFrame.getContentPane().add(jPanel2);
-
-        this.quitButton = new JButton("Quit");
-        quitButton.setBounds(150, 300, 80, 30);
+        infobar.setText("Coups:");
+        add(infobar, layout.PAGE_END);
+        add(quitButton);
 
 
-        jpanel.add(quitButton);
-        this.startButton = new JButton("Start");
-        startButton.setBounds(150, 100, 80, 30);
 
-
-        jpanel.add(startButton);
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
 
-    public Boolean IsStart(){
-        return START;
-    }
-
-
-    public JButton getStartButton() {
-        return this.startButton;
+    public JLabel getInfobar() {
+        return infobar;
     }
 
     public JButton getQuitButton() {
-        return this.quitButton;
+
+        return quitButton;
     }
-
-
 }
