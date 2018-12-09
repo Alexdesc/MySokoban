@@ -1,27 +1,16 @@
 package view;
 
 import model.Position;
+import model.SokobanImage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 
 public class Screen extends JPanel{
+    
 
-
-    //images
-
-
-    private ImageIcon wall = new ImageIcon(getClass().getResource("../rsrc/mur.gif"));
-    private ImageIcon player = new ImageIcon(getClass().getResource("../rsrc/perso.gif"));
-    private ImageIcon playerZone = new ImageIcon(getClass().getResource("../rsrc/persoZone.gif"));
-    private ImageIcon object = new ImageIcon(getClass().getResource("../rsrc/caisse.gif"));
-    private ImageIcon objectZone = new ImageIcon(getClass().getResource("../rsrc/caisseOK.gif"));
-    private ImageIcon goal = new ImageIcon(getClass().getResource("../rsrc/zone.gif"));
-    private ImageIcon none = new ImageIcon(getClass().getResource("../rsrc/vide.gif"));
-
-
-
+    private SokobanImage sprite = SokobanImage.getInstance();
     private JLabel infobar;
     private  BorderLayout layout;
 
@@ -52,58 +41,33 @@ public class Screen extends JPanel{
 
             switch (map.get(pos)) {
                 case '0':
-                    this.add(new JLabel(none));
+                    this.add(new JLabel(sprite.getNone()));
                     break;
                 case '1':
-                    this.add(new JLabel(wall));
+                    this.add(new JLabel(sprite.getWall()));
                     break;
                 case '2':
-                    this.add(new JLabel(object));
+                    this.add(new JLabel(sprite.getCaisse()));
                     break;
                 case '5':
-                    this.add(new JLabel(player));
+                    this.add(new JLabel(sprite.getPlayer()));
                     break;
                 case '4':
-                    this.add(new JLabel(goal));
+                    this.add(new JLabel(sprite.getGoal()));
                     break;
                 default:
-                    this.add(new JLabel(none));
+                    this.add(new JLabel(sprite.getNone()));
             }
         }
 
         this.updateUI();
-        Update(map);
     }
 
 
     public void Update(LinkedHashMap<Position, Character> map){
 
         this.removeAll();
-
-        for (Position pos: map.keySet()) {
-
-            switch (map.get(pos)) {
-                case '0':
-                    this.add(new JLabel(none));
-                    break;
-                case '1':
-                    this.add(new JLabel(wall));
-                    break;
-                case '2':
-                    this.add(new JLabel(object));
-                    break;
-                case '5':
-                    this.add(new JLabel(player));
-                    break;
-                case '4':
-                    this.add(new JLabel(goal));
-                    break;
-                default:
-                    this.add(new JLabel(none));
-            }
-        }
-
-        this.updateUI();
+        this.setSprite(map);
     }
 
 

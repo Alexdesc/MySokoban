@@ -187,10 +187,12 @@ public class Game {
             }
 
             if (CheckWin()){
-                if (this.option.charAt(0) != 1) {
+                System.out.println(this.option);
+                if (this.option.equals("2")) {
                     v.win_graphic();
                 } else {
-                    v.win_console();
+                    v.displayTextMaze(m.getMap(), coups);
+                    v.win_console(coups);
                     System.exit(0);
                 }
 

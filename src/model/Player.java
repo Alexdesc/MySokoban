@@ -38,6 +38,7 @@ public class Player {
     {
         this.position = position;
     }
+
     private void initMissile() {
 
         loadImage("src/rsrc/Player.png");

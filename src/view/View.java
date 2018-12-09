@@ -26,23 +26,10 @@ public class View {
     //images
 
 
-    private ImageIcon wall = new ImageIcon(getClass().getResource("../rsrc/mur.gif"));
-    private ImageIcon player = new ImageIcon(getClass().getResource("../rsrc/perso.gif"));
-    private ImageIcon playerZone = new ImageIcon(getClass().getResource("../rsrc/persoZone.gif"));
-    private ImageIcon object = new ImageIcon(getClass().getResource("../rsrc/caisse.gif"));
-    private ImageIcon objectZone = new ImageIcon(getClass().getResource("../rsrc/caisseOK.gif"));
-    private ImageIcon goal = new ImageIcon(getClass().getResource("../rsrc/zone.gif"));
-    private ImageIcon none = new ImageIcon(getClass().getResource("../rsrc/vide.gif"));
 
-
-    public JTextArea jTextArea;
-    public JScrollPane jScrollPane;
-
-    private JLabel keyLabel = new JLabel("Press something");
     private static final View instance = new View();
     private static Graphic graphic;
-
-    private static Menu menu;
+    private static Menu info;
     //private constructor to avoid client applications to use constructor
     private View(){}
 
@@ -85,8 +72,8 @@ public class View {
 
     public void displayMenu(){
 
-        this.menu = new Menu();
-        this.menu.setVisible(true);
+        this.info = new Menu();
+        this.info.setVisible(true);
 
     }
 
@@ -98,12 +85,12 @@ public class View {
         this.graphic.graphic(maze, map, player, size);
     }
 
-    public void win_console(){
-        System.out.println(ANSI_GREEN + " " +"VICTOIRE");
+    public void win_console(int coups){
+        System.out.println(ANSI_GREEN + " " +"VICTORY with " + coups + " moves");
     }
 
     public void win_graphic(){
-        JFrame winframe = new JFrame("VICTOIRE");
+        JFrame winframe = new JFrame("VICTORY");
         winframe.setVisible(true);
         winframe.setBackground(black);
         winframe.setSize(852 , 480);
@@ -114,10 +101,6 @@ public class View {
 
     }
 
-
-    public Menu getMenu() {
-        return this.menu;
-    }
 
 
     public Graphic getGraphic() {
