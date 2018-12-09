@@ -13,11 +13,10 @@ public class Graphic extends JFrame {
 
   //  private  SokobanImage SImg = new SokobanImage();
     private  Screen sc;
-    private Menu info;
-
-    public final void initUI(int[] size) {
+    private DetailBar info;
 
 
+    public Graphic(Position maze[][], LinkedHashMap map, Player player, int [] size ){
         setVisible(true);
         setBackground(Color.black);
         setSize(800, 700);
@@ -26,29 +25,17 @@ public class Graphic extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout layout = new BorderLayout();
         this.sc  = new Screen(size[0], size[1]);
-        this.info = new Menu();
+        this.info = new DetailBar();
         this.add(info, BorderLayout.PAGE_END);
         this.add(sc, BorderLayout.CENTER);
-
-
-
-
-    }
-
-
-    public void graphic(Position maze[][], LinkedHashMap map, Player player, int [] size ) {
-
-        initUI(size);
         sc.setSprite(map);
-
     }
-
 
     public Screen getSc() {
         return sc;
     }
 
-    public Menu getInfo(){
+    public DetailBar getInfo(){
         return info;
     }
 

@@ -3,49 +3,40 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu extends JPanel{
-    private JPanel panel1;
-    private JButton consoleModeButton;
-    private Boolean START = false;
+public class Menu extends JFrame {
 
 
-    private JButton startButton;
-    private JLabel infobar;
-    private  BorderLayout layout;
-    private JButton quitButton = new JButton("Quit");
+    JButton   aiButton = new JButton("AI");
+    JButton   manualButton = new JButton("MANUAL");
+    JButton   quitButton = new JButton("QUIT");
 
-    public Menu() {
-
-
-
+    public Menu(){
+        JPanel panel = new JPanel();
         setVisible(true);
+        setBackground(Color.black);
+        setSize(100, 200);
+        setLocationRelativeTo(null);
+        setTitle("MySokoban");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        BorderLayout layout = new BorderLayout();
 
+        panel.add(manualButton);
+        panel.add(aiButton);
+        panel.add(quitButton);
 
-        infobar = new JLabel();
-        layout = new BorderLayout();
-
-        setBackground(Color.gray);
-
-        quitButton = new JButton("Quit");
-
-        quitButton.setFocusable(false);
-
-        infobar.setText("Coups:");
-        add(infobar, layout.PAGE_END);
-        add(quitButton);
-
-
-
+        add(panel);
 
     }
 
+    public JButton getAiButton() {
+        return aiButton;
+    }
 
-    public JLabel getInfobar() {
-        return infobar;
+    public JButton getManualButton() {
+        return manualButton;
     }
 
     public JButton getQuitButton() {
-
         return quitButton;
     }
 }

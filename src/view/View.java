@@ -29,7 +29,7 @@ public class View {
 
     private static final View instance = new View();
     private static Graphic graphic;
-    private static Menu info;
+    private static DetailBar info;
     //private constructor to avoid client applications to use constructor
     private View(){}
 
@@ -72,18 +72,19 @@ public class View {
 
     public void displayMenu(){
 
-        this.info = new Menu();
+        this.info = new DetailBar();
         this.info.setVisible(true);
 
     }
 
-    public void displayGraphic(Position maze[][], LinkedHashMap map, Player player, int[] size){
+    public void CreateGraphic(Position maze[][], LinkedHashMap map, Player player, int[] size){
 
-
-        this.graphic = new Graphic();
-        this.graphic.setVisible(true);
-        this.graphic.graphic(maze, map, player, size);
+        this.graphic = new Graphic(maze,map,player,size);
+        this.getGraphic().setVisible(true);
+      //  this.graphic.graphic(maze, map, player, size);
     }
+
+
 
     public void win_console(int coups){
         System.out.println(ANSI_GREEN + " " +"VICTORY with " + coups + " moves");

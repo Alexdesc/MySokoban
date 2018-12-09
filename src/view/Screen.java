@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.LinkedHashMap;
 
 public class Screen extends JPanel{
-    
+
 
     private SokobanImage sprite = SokobanImage.getInstance();
     private JLabel infobar;

@@ -16,15 +16,25 @@ public class SokobanImage {
     private ImageIcon none ;
 
 
-
-
+    /**
+     *  Singleton
+     */
     private static final SokobanImage instance = new SokobanImage();
 
+
+    /**
+     *
+     * @return instance SokobanImage
+     */
     public static SokobanImage getInstance() {
         return instance;
 
     }
 
+
+    /**
+     *
+     */
     public SokobanImage(){
 
         this.Wall = new ImageIcon(getClass().getResource("../rsrc/mur.gif"));

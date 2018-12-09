@@ -3,7 +3,7 @@ package controler;
 import model.Model;
 import model.Player;
 import model.Position;
-import view.Menu;
+import view.DetailBar;
 import view.Screen;
 import view.View;
 
@@ -29,34 +29,134 @@ public class Game {
     private Model m = Model.getInstance();
     private int coups = 0;
     String option;
+    String option2;
+    private Boolean useAI = false;
 
     public void initialisation() throws FileNotFoundException, IOException, InterruptedException{
 
-        m.initPlateau("lvl2.txt");
+        m.initPlateau("src/rsrc/lvl2.txt");
         System.out.println("Console mode : 1 \n Graphical mode : 2");
         Scanner scanner = new Scanner(System.in);
        option = scanner.next();
         if (option.equals("1")){
+            System.out.println("Use AI ?\n Yes : 1 \n No : 2");
+            option2 = scanner.next();
+
             v.displayTextMaze(m.getMap(),  coups);
             while (!CheckWin()) {
-                console_mode();
+                if (option2.equals("2")){
+                    console_mode();
+                }
+                else
+                {
+                    System.out.println("AI");
+                    algo();
+
+                }
+
                 v.displayTextMaze(m.getMap(), coups);
             }
         }
         else {
 
-                    v.displayGraphic(m.getMaze(), m.getMap(),m.getPlayer(), m.getSize());
-                    v.getGraphic().addKeyListener(MyKey());
 
+         //   Menu menu = new Menu();
+
+
+          //  v.CreateGraphic(m.getMaze(), m.getMap(),m.getPlayer(), m.getSize());
+
+         /*   while (!CheckWin()){
+                try {
+                    algo();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                otherListner();
+            }*/
+
+
+//            v.CreateGraphic(m.getMaze(), m.getMap(),m.getPlayer(), m.getSize());
+
+
+          /*  menu.getQuitButton().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    System.exit(0);
+                }
+            });
+*/
+        /*    menu.getAiButton().addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent event) {
+
+                    menu.setVisible(false);
+                    v.getGraphic().setVisible(true);
+                }
+            });
+*//*
+            menu.getManualButton().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+*/
+                   // menu.setVisible(false);
+                    v.CreateGraphic(m.getMaze(), m.getMap(),m.getPlayer(), m.getSize());
+                    v.getGraphic().addKeyListener(MyKey());
+                    otherListner();
+           /*     }
+            });
+*/
+
+
+
+
+
+
+
+
+
+
+            //info.getInfobar().setText("Coups: " + coups);
+            //sc.Update(m.getMap());
         }
 
     }
 
 
+    private void algo() throws InterruptedException {
+        Player player = m.getPlayer();
+        Position next_position;
+        LinkedHashMap<Position, Character> map = m.getMap();
+        Position[][] maze = m.getMaze();
+        List ArrivalList = m.getArrivals();
+
+
+        Thread.sleep(1000);
+        next_position =  player.getPosition().toUp();
+        if (map.get(maze[next_position.getY()][next_position.getX()]) == '0'){
+            move("z");
+            return;
+        }
+        next_position =  player.getPosition().toDown();
+        if (map.get(maze[next_position.getY()][next_position.getX()]) == '0'){
+            move("s");
+            return;
+        }
+        next_position =  player.getPosition().toLeft();
+        if (map.get(maze[next_position.getY()][next_position.getX()]) == '0'){
+            move("q");
+            return;
+        }
+        next_position =  player.getPosition().toRight();
+        if (map.get(maze[next_position.getY()][next_position.getX()]) == '0'){
+            move("d");
+            return;
+        }
+
+
+
+    }
+
 
     private KeyListener MyKey() {
-        Screen sc =  v.getGraphic().getSc();
-        Menu info =  v.getGraphic().getInfo();
+
 
         KeyListener keyListener = new KeyListener() {
             @Override
@@ -68,8 +168,7 @@ public class Game {
             @Override
             public  synchronized void  keyPressed(KeyEvent e) {
                 move(e.getKeyChar()+"");
-                info.getInfobar().setText("Coups: " + coups);
-                sc.Update(m.getMap());
+                otherListner();
 
             }
 
@@ -80,14 +179,23 @@ public class Game {
 
         };
 
-       info.getQuitButton().addActionListener(new ActionListener() {
+        otherListner();
+
+
+        return keyListener;
+
+    }
+
+    private void otherListner() {
+        Screen sc =  v.getGraphic().getSc();
+        DetailBar info =  v.getGraphic().getInfo();
+        info.getInfobar().setText("Coups: " + coups);
+        sc.Update(m.getMap());
+        info.getQuitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.exit(0);
             }
         });
-
-        return keyListener;
-
     }
 
 
@@ -187,7 +295,6 @@ public class Game {
             }
 
             if (CheckWin()){
-                System.out.println(this.option);
                 if (this.option.equals("2")) {
                     v.win_graphic();
                 } else {
